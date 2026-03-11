@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Medallero Catas Colab</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <img src="Logo_Catas_Colab.png" alt="Logo" class="main-logo">
+        <h1>Medallero Cervecerías Chilenas</h1>
+    </header>
+    <main>
+        <div class="charts-container">
+            <div class="chart-box">
+                <h2>Ranking de Cervecerías</h2>
+                <canvas id="graficoMedallas"></canvas>
+            </div>
+            <div class="chart-box">
+                <h2>Estilos más Premiados</h2>
+                <canvas id="graficoEstilos"></canvas>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h3>Certámenes y Resultados</h3>
+        <div class="logos-grid" id="footerLogos"></div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
