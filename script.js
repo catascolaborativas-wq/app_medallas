@@ -26,19 +26,19 @@ async function iniciarApp() {
             }
         });
 
-        // 1. GRÁFICO DE BARRAS HORIZONTALES (TOP 10)
+        // 1. RANKING BARRAS HORIZONTALES (SOLO TOP 10)
         const rankingCont = document.getElementById('chart-breweries');
         const top10 = Object.entries(cervecerias).sort((a,b) => b[1]-a[1]).slice(0, 10);
         const maxMedallas = top10[0][1];
         rankingCont.innerHTML = top10.map(([n, v]) => `
             <div style="margin-bottom:12px">
-                <div style="display:flex;justify-content:space-between;font-size:12px"><span>${n}</span><b>${v}</b></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span>${n}</span><b>${v} Medallas</b></div>
                 <div style="background:#eee;height:12px;border-radius:6px;overflow:hidden;margin-top:4px">
                     <div style="background:#d63384;width:${(v/maxMedallas)*100}%;height:100%;"></div>
                 </div>
             </div>`).join('');
 
-        // 2. GRÁFICO DE TORTA REDONDO (SVG)
+        // 2. GRÁFICO DE TORTA CIRCULAR (IPA, STOUT, LAGER, SOUR)
         const tortaCont = document.getElementById('chart-styles');
         const total = Object.values(estilos).reduce((a, b) => a + b, 0);
         const colores = ["#d63384", "#6610f2", "#fd7e14", "#20c997"]; 
@@ -62,7 +62,7 @@ async function iniciarApp() {
                     </div>`).join('')}</div>
             </div>`;
 
-        // 3. LOGOS CLICKABLES
+        // 3. LOGOS CLICKABLES Y BIOBIO
         const grid = document.getElementById('grid-logos');
         const filasC = dataC.split(/\r?\n/).slice(1);
         grid.innerHTML = ""; 
@@ -81,4 +81,3 @@ async function iniciarApp() {
     } catch (e) { console.error(e); }
 }
 iniciarApp();
-                    
