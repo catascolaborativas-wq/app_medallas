@@ -25,9 +25,11 @@ async function iniciarApp() {
             }
         });
 
+        // RENDERIZADO DE GRÁFICOS
         renderGrafico('chart-breweries', cervecerias, "Medallas");
         renderGrafico('chart-styles', gruposEstilos, "Premios");
 
+        // RENDERIZADO DE LOGOS
         const grid = document.getElementById('grid-logos');
         const filasC = dataC.split(/\r?\n/).slice(1);
         grid.innerHTML = ""; 
@@ -37,16 +39,15 @@ async function iniciarApp() {
             let nombre = col ? col[0].trim() : "Pendiente";
             let link = col && col[1] ? col[1].trim() : "#";
             
-            // CORRECCIÓN CLAVE: BioBio usa .PNG (mayúsculas) en tu GitHub
+            // CORRECCIÓN PARA BIOBIO .PNG (Mayúsculas)
             let ext = (nombre.includes("BioBio")) ? ".PNG" : ".png";
             if (nombre === "" || nombre === "Pendiente") { nombre = "Pendiente"; ext = ".png"; }
 
-            const contenido = `<img src="${nombre}${ext}" style="width:90%;height:90%;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;font-size:9px;">${nombre}</span>`;
+            const imgHTML = `<img src="${nombre}${ext}" style="width:90%;height:90%;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;font-size:9px;">${nombre}</span>`;
             
             const div = document.createElement('div');
             div.className = 'slot';
-            div.style.cursor = (link !== "#") ? "pointer" : "default";
-            div.innerHTML = (link !== "#") ? `<a href="${link}" target="_blank" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;">${contenido}</a>` : contenido;
+            div.innerHTML = (link !== "#") ? `<a href="${link}" target="_blank" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;">${imgHTML}</a>` : imgHTML;
             grid.appendChild(div);
         }
     } catch (e) { console.log(e); }
@@ -54,7 +55,8 @@ async function iniciarApp() {
 
 function renderGrafico(id, data, label) {
     const cont = document.getElementById(id);
-    const sort = Object.entries(data).sort((a,b) => b[1]-a[1]).slice(0, 10);
+    const sort = Object.entries(data).sort((a,b) => b[1]-a[1]);
+    if (sort.length === 0) return;
     const max = sort[0][1];
     cont.innerHTML = sort.map(([n, v]) => `
         <div style="margin-bottom:12px">
