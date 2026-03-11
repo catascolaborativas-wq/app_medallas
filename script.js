@@ -9,7 +9,7 @@ async function iniciarApp() {
 
         const filasM = dataM.split(/\r?\n/).slice(1);
         const cervecerias = {};
-        const estilos = { "IPA": 0, "STOUT": 0, "LAGER": 0, "SOUR": 0 };
+        const estilos = { "STOUT": 0, "IPA": 0, "LAGER": 0, "SOUR": 0 };
 
         filasM.forEach(f => {
             const c = f.split(/[;,]/);
@@ -26,7 +26,7 @@ async function iniciarApp() {
             }
         });
 
-        // 1. RANKING BARRAS HORIZONTALES (SOLO TOP 10)
+        // 1. RANKING: CORTE ESTRICTO TOP 10 (BARRAS HORIZONTALES)
         const rankingCont = document.getElementById('chart-breweries');
         const top10 = Object.entries(cervecerias).sort((a,b) => b[1]-a[1]).slice(0, 10);
         const maxMedallas = top10[0][1];
@@ -38,7 +38,7 @@ async function iniciarApp() {
                 </div>
             </div>`).join('');
 
-        // 2. GRÁFICO DE TORTA CIRCULAR (IPA, STOUT, LAGER, SOUR)
+        // 2. ESTILOS: GRÁFICO DE TORTA CIRCULAR (SVG)
         const tortaCont = document.getElementById('chart-styles');
         const total = Object.values(estilos).reduce((a, b) => a + b, 0);
         const colores = ["#d63384", "#6610f2", "#fd7e14", "#20c997"]; 
@@ -46,23 +46,22 @@ async function iniciarApp() {
         
         const sectores = Object.entries(estilos).map(([nombre, valor], i) => {
             const porc = (valor / total) * 100;
-            if (porc === 0) return "";
             const inicio = acumulado;
             acumulado += porc;
             return `<circle r="16" cx="16" cy="16" fill="transparent" stroke="${colores[i]}" stroke-width="32" stroke-dasharray="${porc} 100" stroke-dashoffset="-${inicio}" />`;
         }).join('');
 
         tortaCont.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; gap:15px">
-                <svg viewBox="0 0 32 32" style="width:160px; height:160px; transform: rotate(-90deg); border-radius:50%; background:#f0f0f0;">${sectores}</svg>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:20px">
+                <svg viewBox="0 0 32 32" style="width:180px; height:180px; transform: rotate(-90deg); border-radius:50%; background:#f0f0f0;">${sectores}</svg>
                 <div style="width:100%">${Object.entries(estilos).map(([n, v], i) => `
-                    <div style="display:flex;align-items:center;font-size:12px;margin-top:4px">
-                        <div style="width:12px;height:12px;background:${colores[i]};margin-right:8px;border-radius:2px"></div>
-                        ${n}: <b>${v}</b> (${total>0?Math.round((v/total)*100):0}%)
+                    <div style="display:flex;align-items:center;font-size:13px;margin-top:5px">
+                        <div style="width:14px;height:14px;background:${colores[i]};margin-right:10px;border-radius:3px"></div>
+                        ${n}: <b>${v} Premios</b> (${Math.round((v/total)*100)}%)
                     </div>`).join('')}</div>
             </div>`;
 
-        // 3. LOGOS CLICKABLES Y BIOBIO
+        // 3. LOGOS FOOTER (BIOBIO .PNG)
         const grid = document.getElementById('grid-logos');
         const filasC = dataC.split(/\r?\n/).slice(1);
         grid.innerHTML = ""; 
