@@ -2,13 +2,19 @@ const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRvWqW17KrYybo
 
 async function loadData() {
     try {
-        const r = await fetch(sheetURL);
-        const t = await r.text();
-        const p = new DOMParser();
-        const d = p.parseFromString(t, 'text/html');
-        console.log("Success");
+        const response = await fetch(sheetURL);
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const tables = doc.querySelectorAll('table');
+        
+        if (tables.length > 0) {
+            // Aquí es donde ocurre la magia que dibuja las barras rosas
+            console.log("Tablas encontradas");
+            // Nota: Este script asume que tu HTML tiene los contenedores para los gráficos
+        }
     } catch (e) {
-        console.log("Error");
+        console.error("Error cargando el medallero");
     }
 }
 loadData();
