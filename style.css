@@ -1,9 +1,0 @@
-body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; color: #0c1f2b; text-align: center; }
-header { background: #0c1f2b; color: #e32c6c; padding: 20px; border-bottom: 5px solid #e32c6c; }
-.main-logo { max-height: 80px; }
-.charts-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-.chart-box { background: white; padding: 20px; border-radius: 10px; width: 45%; min-width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-footer { background: #0c1f2b; color: white; padding: 40px; }
-h3 { color: #e32c6c; }
-.logos-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; max-width: 900px; margin: 0 auto; }
-.logo-item img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #e32c6c; background: white; object-fit: cover; }
