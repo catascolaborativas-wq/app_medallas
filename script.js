@@ -7,11 +7,11 @@ async function iniciarApp() {
         const dataM = await resM.text();
         const dataC = await resC.text();
 
+        // 1. PROCESAR GRÁFICOS (Medallero)
         const filasM = dataM.split(/\r?\n/).slice(1);
         const cervecerias = {};
         const gruposEstilos = { "IPA": 0, "STOUT": 0, "LAGER": 0, "SOUR": 0 };
 
-        // 1. PROCESAR MEDALLAS (Ranking y Estilos)
         filasM.forEach(f => {
             const c = f.split(/[;,]/);
             const medalla = c[6]?.trim().toUpperCase(); 
@@ -30,30 +30,38 @@ async function iniciarApp() {
         renderBarras('chart-breweries', cervecerias);
         renderTorta('chart-styles', gruposEstilos);
 
-        // 2. PROCESAR LOGOS (Aquí estaba el fallo)
+        // 2. PROCESAR LOGOS CON LINKS (Certámenes)
         const grid = document.getElementById('grid-logos');
         const filasC = dataC.split(/\r?\n/).slice(1);
         grid.innerHTML = ""; 
 
         for (let i = 0; i < 18; i++) {
             const col = filasC[i] ? filasC[i].split(/[;,]/) : null;
-            // Quitamos espacios extra que mete el CSV
             let nombreBase = col ? col[0].trim() : "Pendiente";
+            let linkCertamen = col && col[1] ? col[1].trim() : "#";
             
             const div = document.createElement('div');
             div.className = 'slot';
 
-            // Si es "Pendiente", cargamos Pendiente.png
-            // Si es "BioBio Beer Cup - Chile", cargamos BioBio Beer Cup - Chile.png
+            // CASO ESPECIAL BIOBIO: Forzamos la extensión .PNG en mayúsculas como está en tu GitHub
+            let extension = (nombreBase.includes("BioBio")) ? ".PNG" : ".png";
+
             if (nombreBase === "") nombreBase = "Pendiente";
 
-            div.innerHTML = `
-                <img src="${nombreBase}.png" 
+            // Si hay link, envolvemos en un <a>, si no, solo la imagen
+            const htmlImagen = `
+                <img src="${nombreBase}${extension}" 
                      alt="${nombreBase}" 
-                     style="width:80%; height:80%; object-fit:contain;"
+                     style="width:90%; height:90%; object-fit:contain;"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <span style="display:none; font-size:10px; color:#555;">${nombreBase}.png no hallada</span>
+                <span style="display:none; font-size:9px; color:#666;">${nombreBase}</span>
             `;
+
+            if (linkCertamen !== "#" && linkCertamen !== "") {
+                div.innerHTML = `<a href="${linkCertamen}" target="_blank" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">${htmlImagen}</a>`;
+            } else {
+                div.innerHTML = htmlImagen;
+            }
             
             grid.appendChild(div);
         }
