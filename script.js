@@ -1,4 +1,3 @@
-/* translate=no */
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRvWqW17KrYyboub3kk01xW1XDr77apCSXw9EJE7y1GFG47Jod727GJT9KKYSn04_BNnZ7KOvt1JkbM/pubhtml";
 
 async function loadData() {
@@ -7,9 +6,14 @@ async function loadData() {
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
-        console.log("Sistema funcionando");
-    } catch (e) {
-        console.log("Error de conexion");
+        const tables = doc.querySelectorAll('table');
+        
+        if (tables.length > 0) {
+            console.log("Datos listos para el medallero");
+            // Aquí va la lógica de los gráficos rosas
+        }
+    } catch (error) {
+        console.error("Fallo de conexión");
     }
 }
 loadData();
