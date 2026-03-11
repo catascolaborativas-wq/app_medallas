@@ -2,25 +2,13 @@ const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRvWqW17KrYybo
 
 async function loadData() {
     try {
-        const response = await fetch(sheetURL);
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const tables = doc.querySelectorAll('table');
-        
-        if (tables.length > 0) {
-            console.log("Datos cargados. Procesando Medallero...");
-            // Aquí el código recorre tu Excel y genera las barras rosas
-            renderCharts(); 
-        }
-    } catch (error) {
-        console.error("Error cargando datos:", error);
+        const r = await fetch(sheetURL);
+        const t = await r.text();
+        const p = new DOMParser();
+        const d = p.parseFromString(t, 'text/html');
+        console.log("Success");
+    } catch (e) {
+        console.log("Error");
     }
 }
-
-function renderCharts() {
-    // Lógica para dibujar el ranking de cervecerías y estilos
-    console.log("Dibujando gráficos...");
-}
-
 loadData();
