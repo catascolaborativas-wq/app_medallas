@@ -1,0 +1,123 @@
+/* Paleta de colores y variables */
+:root {
+    --rosa-corporativo: #d63384;
+    --fondo-oscuro: #0a1118;
+    --gris-claro: #f4f7f6;
+    --blanco: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+    background-color: #eeeeee;
+    margin: 0;
+    color: #333;
+}
+
+/* Cabecera */
+.header {
+    background-color: var(--fondo-oscuro);
+    color: var(--blanco);
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.main-logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* Gráficos: Prioridad Arriba */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas para los 2 gráficos */
+    gap: 20px;
+}
+
+.card {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: var(--rosa-corporativo);
+    font-size: 1.2rem;
+    margin-top: 0;
+    border-bottom: 2px solid var(--gris-claro);
+    padding-bottom: 10px;
+}
+
+/* Diseño de las Barras */
+.bar-row {
+    margin-bottom: 15px;
+}
+
+.bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.bar-track {
+    background: #e9ecef;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    background-color: var(--rosa-corporativo);
+    height: 100%;
+    width: 0; /* JS controla el ancho */
+    transition: width 1s ease-out;
+}
+
+/* Footer: Logos de Certámenes al final */
+.footer {
+    background-color: var(--fondo-oscuro);
+    color: var(--blanco);
+    padding: 50px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 logos por fila */
+    gap: 15px;
+    max-width: 1000px;
+    margin: 30px auto 0;
+}
+
+.slot {
+    background: rgba(255, 255, 255, 0.05);
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #888;
+    padding: 10px;
+}
+
+/* Ajustes para Móvil */
+@media (max-width: 768px) {
+    .charts-grid {
+        grid-template-columns: 1fr; /* Un gráfico sobre otro en celular */
+    }
+    .logos-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 logos por fila en celular */
+    }
+}
