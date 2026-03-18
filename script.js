@@ -4,67 +4,51 @@ const GID_BBDD = '0';
 
 async function init() {
     try {
-        const [resResumen, resBBDD] = await Promise.all([
+        const [resR, resB] = await Promise.all([
             fetch(`https://docs.google.com/spreadsheets/d/${EXCEL_ID}/export?format=csv&gid=${GID_RESUMEN}`),
             fetch(`https://docs.google.com/spreadsheets/d/${EXCEL_ID}/export?format=csv&gid=${GID_BBDD}`)
         ]);
-
-        const textResumen = await resResumen.text();
-        const textBBDD = await resBBDD.text();
-
-        // 1. Gráficos
-        const filasResumen = textResumen.split('\n').map(f => f.split(',').map(c => c.replace(/"/g, '').trim()));
-        renderCharts(filasResumen);
-
-        // 2. Medallero con links (Columna H / Indice 7)
-        const filasBBDD = textBBDD.split('\n').map(r => r.split(',').map(c => c.replace(/"/g, '').trim()));
-        renderMedallas(filasBBDD.slice(1).filter(f => f[0]));
-
-    } catch (e) { console.error("Error:", e); }
+        const dataR = (await resR.text()).split('\n').map(f => f.split(',').map(c => c.replace(/"/g, '').trim()));
+        const dataB = (await resB.text()).split('\n').map(f => f.split(',').map(c => c.replace(/"/g, '').trim()));
+        
+        renderCharts(dataR);
+        renderMedallas(dataB.slice(1).filter(f => f[0]));
+    } catch (e) { console.error(e); }
 }
 
-function renderCharts(filas) {
-    const colors = ['#f1c40f', '#e67e22', '#d35400', '#c0392b', '#1abc9c', '#2ecc71', '#3498db'];
+function renderCharts(f) {
+    Chart.defaults.color = '#ffffff';
+    const colors = ['#f7c32f', '#e32c6c', '#00a8cc', '#2ecc71', '#9b59b6'];
+
+    new Chart(document.getElementById('graficoCervecerias'), { type: 'bar', data: { labels: f.slice(1,16).map(i=>i[0]), datasets: [{data: f.slice(1,16).map(i=>parseInt(i[1])), backgroundColor: colors[0]}] }, options: {indexAxis: 'y', responsive: true, maintainAspectRatio: false} });
+    new Chart(document.getElementById('graficoEstilos'), { type: 'pie', data: { labels: f.slice(1,11).map(i=>i[3]), datasets: [{data: f.slice(1,11).map(i=>parseInt(i[4])), backgroundColor: colors}] }, options: {responsive: true, maintainAspectRatio: false} });
     
-    new Chart(document.getElementById('graficoCervecerias'), {
-        type: 'bar',
-        data: { labels: filas.slice(1, 16).map(f => f[0]), datasets: [{ data: filas.slice(1, 16).map(f => parseInt(f[1]) || 0), backgroundColor: colors }] },
-        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-    });
-
-    new Chart(document.getElementById('graficoEstilos'), {
-        type: 'pie',
-        data: { labels: filas.slice(1, 11).map(f => f[3]), datasets: [{ data: filas.slice(1, 11).map(f => parseInt(f[4]) || 0), backgroundColor: colors }] },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
-
-    new Chart(document.getElementById('graficoPaises'), {
-        type: 'bar',
-        data: { labels: filas.slice(1, 6).map(f => f[6]), datasets: [{ data: filas.slice(1, 6).map(f => parseInt(f[7]) || 0), backgroundColor: colors }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-    });
+    // Gráfico de 11 Países (Columna I en BBDD, procesada en G y H del Resumen)
+    new Chart(document.getElementById('graficoPaises'), { type: 'bar', data: { labels: f.slice(1,12).map(i=>i[6]), datasets: [{data: f.slice(1,12).map(i=>parseInt(i[7])), backgroundColor: colors[1]}] }, options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}}} });
 }
 
-function renderMedallas(medallas) {
+function renderMedallas(m) {
     const grid = document.getElementById('medallero-grid');
     grid.innerHTML = "";
-
-    medallas.forEach(m => {
+    m.forEach(i => {
+        const link = i[7]; // Columna H (URL)
+        const hasLink = link && link.startsWith('http');
         const card = document.createElement('a');
         card.className = 'card-medalla';
-        card.href = m[7] || "#"; // Link columna H
-        card.target = "_blank";
-        
+        card.href = hasLink ? link : '#';
+        card.target = hasLink ? "_blank" : "_self";
+
         card.innerHTML = `
             <div class="logo-container">
-                <img src="logos_cervezas/${m[1]}.png" class="logo-cerveza" onerror="this.src='logos_cervezas/default.png'">
+                <img src="logos_cervezas/${i[1]}.png" class="logo-cerveza" onerror="this.src='logos_cervezas/default.png'">
             </div>
-            <img src="logos_certamenes/${m[0]}.png" class="logo-certamen" onerror="this.style.display='none'">
-            <h4>${m[1]} - ${m[2]}</h4>
-            <p><strong>${m[4]}</strong> en ${m[0]} (${m[6]})</p>
+            <img src="${hasLink ? 'logos_certamenes/' + i[0] + '.png' : 'logos_certamenes/Pendiente.png'}" 
+                 class="logo-certamen" onerror="this.src='logos_certamenes/default.png'">
+            <p><strong>${i[1]}</strong></p>
+            <p>${i[2]}</p>
+            <p style="color:#e32c6c; font-weight:bold;">${i[4]}</p>
         `;
         grid.appendChild(card);
     });
 }
-
 init();
