@@ -1,7 +1,41 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Medallero Cervecería</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .contenedor-principal { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .grafico-caja { margin-bottom: 50px; padding: 20px; border-bottom: 1px solid #eee; }
+        canvas { width: 100% !important; height: auto !important; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
 
-<div class="contenedor-graficos">
-    <canvas id="graficoCervecerias"></canvas>
-    <canvas id="graficoEstilos"></canvas>
-    <canvas id="graficoPaises"></canvas>
-</div>
+    <div class="contenedor-principal">
+        <h1>📊 Resumen de Medallas</h1>
+
+        <div class="grafico-caja">
+            <h3>Top 15 Cervecerías Chilenas</h3>
+            <canvas id="graficoCervecerias"></canvas>
+        </div>
+
+        <div class="grafico-caja">
+            <h3>Estilos más premiados en Chile</h3>
+            <div style="max-width: 500px; margin: auto;">
+                <canvas id="graficoEstilos"></canvas>
+            </div>
+        </div>
+
+        <div class="grafico-caja">
+            <h3>Top 5 Países con más Medallas</h3>
+            <canvas id="graficoPaises"></canvas>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
