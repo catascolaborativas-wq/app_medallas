@@ -8,36 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="contenedor-principal">
-        <div class="brand-header">
-            <img src="Logo Catas Colaborativas 01.png" class="logo-catas" alt="Logo Catas Colaborativas">
+        <div class="encabezado-marca">
+            <img src="Logo Catas Colaborativas 01.png" class="logo-catas" alt="Catas Colaborativas">
         </div>
 
         <h1>📊 Estadísticas de Medallas</h1>
         <div class="panel-graficos">
-            <div class="tarjeta-grafico">
-                <h3>🏆 Top 15 Cervecerías Chilenas</h3>
-                <canvas id="graficoCervecerias"></canvas>
-            </div>
-            <div class="tarjeta-grafico pie-chart">
-                <h3>🍺 Estilos más premiados (Chile)</h3>
-                <canvas id="graficoEstilos"></canvas>
-            </div>
-            <div class="tarjeta-grafico">
-                <h3>🌍 Top 5 Países con más Medallas</h3>
-                <canvas id="graficoPaises"></canvas>
-            </div>
+            <div class="tarjeta-grafico"><h3>🏆 Top 15 Cervecerías</h3><canvas id="graficoCervecerias"></canvas></div>
+            <div class="tarjeta-grafico"><h3>🍺 Estilos más Premiados</h3><canvas id="graficoEstilos"></canvas></div>
+            <div class="tarjeta-grafico"><h3>🌍 Top 11 Países</h3><canvas id="graficoPaises"></canvas></div>
         </div>
 
         <hr>
 
-        <h1>🥇 Medallero Histórico</h1>
+        <h1>🥇 Medallero Completo</h1>
         <div id="rejilla-medallero" class="rejilla-medallero">
-            <p style="text-align: center; width: 100%; color: white;">Cargando medallero...</p>
+            <p style="color: white; text-align: center;">Cargando datos...</p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
