@@ -2,27 +2,29 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard APP MEDALLAS</title>
+    <title>APP MEDALLAS - Dashboard & Medallero</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
-        .card { background: white; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; }
-        .chart-wrapper { height: 350px; margin-bottom: 30px; }
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+        .chart-wrapper { height: 300px; margin-bottom: 50px; }
+        .grid-medallas { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
+        .card-medalla { border: 1px solid #ddd; padding: 10px; text-align: center; border-radius: 8px; }
+        .logo-cerveza { max-width: 100px; height: auto; }
+        .logo-certamen { max-width: 50px; margin-top: 5px; }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="container">
         <h1>📊 Estadísticas de Medallas</h1>
-        
-        <h3>🏆 Top 15 Cervecerías Chilenas</h3>
         <div class="chart-wrapper"><canvas id="graficoCervecerias"></canvas></div>
-
-        <h3>🍺 Estilos más premiados (Chile)</h3>
-        <div class="chart-wrapper" style="height: 450px;"><canvas id="graficoEstilos"></canvas></div>
-
-        <h3>🌍 Top 5 Países con más Medallas</h3>
+        <div class="chart-wrapper"><canvas id="graficoEstilos"></canvas></div>
         <div class="chart-wrapper"><canvas id="graficoPaises"></canvas></div>
+
+        <hr>
+        <h1>🥇 Medallero Completo</h1>
+        <div id="medallero" class="grid-medallas">
+            </div>
     </div>
     <script src="script.js"></script>
 </body>
