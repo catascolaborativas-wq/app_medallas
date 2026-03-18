@@ -2,40 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Medallero Cervecería</title>
-    <style>
-        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
-        .contenedor-principal { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; }
-        .grafico-caja { margin-bottom: 50px; padding: 20px; border-bottom: 1px solid #eee; }
-        canvas { width: 100% !important; height: auto !important; }
-    </style>
+    <title>Dashboard APP MEDALLAS</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .card { background: white; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .chart-wrapper { height: 350px; margin-bottom: 30px; }
+    </style>
 </head>
 <body>
+    <div class="card">
+        <h1>📊 Estadísticas de Medallas</h1>
+        
+        <h3>🏆 Top 15 Cervecerías Chilenas</h3>
+        <div class="chart-wrapper"><canvas id="graficoCervecerias"></canvas></div>
 
-    <div class="contenedor-principal">
-        <h1>📊 Resumen de Medallas</h1>
+        <h3>🍺 Estilos más premiados (Chile)</h3>
+        <div class="chart-wrapper" style="height: 450px;"><canvas id="graficoEstilos"></canvas></div>
 
-        <div class="grafico-caja">
-            <h3>Top 15 Cervecerías Chilenas</h3>
-            <canvas id="graficoCervecerias"></canvas>
-        </div>
-
-        <div class="grafico-caja">
-            <h3>Estilos más premiados en Chile</h3>
-            <div style="max-width: 500px; margin: auto;">
-                <canvas id="graficoEstilos"></canvas>
-            </div>
-        </div>
-
-        <div class="grafico-caja">
-            <h3>Top 5 Países con más Medallas</h3>
-            <canvas id="graficoPaises"></canvas>
-        </div>
+        <h3>🌍 Top 5 Países con más Medallas</h3>
+        <div class="chart-wrapper"><canvas id="graficoPaises"></canvas></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
