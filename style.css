@@ -1,8 +1,8 @@
 /* Configuración de Marca - Catas Colaborativas */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0c1f2b; /* Azul de marca (Fondo principal) */
-    color: #ffffff; /* Letras blancas para contraste */
+    background-color: #0c1f2b; /* Azul de marca principal */
+    color: #ffffff; /* Letras blancas */
     margin: 0;
     padding: 20px;
 }
