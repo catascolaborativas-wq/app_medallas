@@ -1,51 +1,7 @@
-const EXCEL_ID = '10OZi0vziwSlAlsm52GjvZbv5rbUP7qIWO6doExDrJqU';
-const GID_RESUMEN = '2076789747'; // Tu ID de Resumen_Graficos
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-async function cargarApp() {
-    const url = `https://docs.google.com/spreadsheets/d/${EXCEL_ID}/export?format=csv&gid=${GID_RESUMEN}`;
-    
-    try {
-        const respuesta = await fetch(url);
-        const csv = await respuesta.text();
-        const filas = csv.split('\n').map(f => f.split(','));
-
-        // 1. Gráfico de Barras: Top 15 Cervecerías (Columnas A y B)
-        const labelsCervecerias = filas.slice(1, 16).map(f => f[0]);
-        const datosCervecerias = filas.slice(1, 16).map(f => parseInt(f[1]));
-        renderizarGrafico('graficoCervecerias', 'bar', 'Top 15 Cervecerías', labelsCervecerias, datosCervecerias, true);
-
-        // 2. Gráfico de Torta: Estilos (Columnas D y E)
-        const labelsEstilos = filas.slice(1, 11).map(f => f[3]); // Top 10 estilos para que no se amontonen
-        const datosEstilos = filas.slice(1, 11).map(f => parseInt(f[4]));
-        renderizarGrafico('graficoEstilos', 'pie', 'Estilos más premiados', labelsEstilos, datosEstilos);
-
-        // 3. Gráfico de Columnas: Top 5 Países (Columnas G y H)
-        const labelsPaises = filas.slice(1, 6).map(f => f[6]);
-        const datosPaises = filas.slice(1, 6).map(f => parseInt(f[7]));
-        renderizarGrafico('graficoPaises', 'bar', 'Top 5 Países', labelsPaises, datosPaises, false);
-
-    } catch (e) {
-        console.error("Error cargando datos:", e);
-    }
-}
-
-function renderizarGrafico(id, tipo, titulo, labels, datos, horizontal = false) {
-    new Chart(document.getElementById(id), {
-        type: tipo,
-        data: {
-            labels: labels,
-            datasets: [{
-                label: titulo,
-                data: datos,
-                backgroundColor: ['#f1c40f', '#e67e22', '#d35400', '#c0392b', '#1abc9c']
-            }]
-        },
-        options: {
-            indexAxis: horizontal ? 'y' : 'x',
-            responsive: true,
-            plugins: { legend: { display: tipo === 'pie' } }
-        }
-    });
-}
-
-window.onload = cargarApp;
+<div class="contenedor-graficos">
+    <canvas id="graficoCervecerias"></canvas>
+    <canvas id="graficoEstilos"></canvas>
+    <canvas id="graficoPaises"></canvas>
+</div>
