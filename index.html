@@ -3,34 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APP MEDALLAS - Dashboard & Medallero</title>
+    <title>APP MEDALLAS - Catas Colaborativas</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-container">
-        <h1>📊 Estadísticas de Medallas</h1>
-        <div class="dashboard-graficos">
-            <div class="chart-card">
-                <h3>🏆 Top 15 Cervecerías Chilenas</h3>
-                <canvas id="graficoCervecerias"></canvas>
-            </div>
-            <div class="chart-card pie-chart">
-                <h3>🍺 Estilos más premiados (Chile)</h3>
-                <canvas id="graficoEstilos"></canvas>
-            </div>
-            <div class="chart-card">
-                <h3>🌍 Top 5 Países con más Medallas</h3>
-                <canvas id="graficoPaises"></canvas>
-            </div>
+    <div class="contenedor-principal">
+        <div class="encabezado-marca">
+            <img src="Logo Catas Colaborativas 01.png" class="logo-catas" alt="Logo Catas Colaborativas">
+        </div>
+
+        <h1>📊 Panel de Estadísticas</h1>
+        <div class="panel-graficos">
+            <div class="tarjeta-grafico"><h3>🏆 Top 15 Cervecerías</h3><canvas id="graficoCervecerias"></canvas></div>
+            <div class="tarjeta-grafico"><h3>🍺 Estilos más Premiados</h3><canvas id="graficoEstilos"></canvas></div>
+            <div class="tarjeta-grafico"><h3>🌍 Top 11 Países</h3><canvas id="graficoPaises"></canvas></div>
         </div>
 
         <hr>
 
-        <h1>🥇 Medallero Completo</h1>
-        <div id="medallero-grid" class="medallero-grid">
-            <p style="text-align: center; width: 100%;">Cargando medallero...</p>
-        </div>
+        <h1>🥇 Medallero Histórico</h1>
+        <div id="rejilla-medallero" class="rejilla-medallero"></div>
     </div>
     <script src="script.js"></script>
 </body>
