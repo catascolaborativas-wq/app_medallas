@@ -1,0 +1,41 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0b111a;
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+.header {
+    padding: 30px 0;
+    background-color: #111;
+}
+
+.logo-principal {
+    max-width: 220px;
+}
+
+.grid-medallas {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.recuadro-logo {
+    aspect-ratio: 1 / 1;
+    background: #151d27;
+    border: 1px solid #2a3441;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.img-certamen {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
