@@ -1,153 +1,31 @@
-/* Configuración de Marca - Catas Colaborativas */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0c1f2b; /* Azul de marca principal */
-    color: #ffffff; /* Letras blancas */
-    margin: 0;
-    padding: 20px;
-}
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0c1f2b; margin: 0; padding: 20px; color: #ffffff; }
+.contenedor-principal { max-width: 1200px; margin: auto; padding: 10px; }
 
-.contenedor-principal {
-    max-width: 1200px;
-    margin: auto;
-    padding: 10px;
-}
+/* Header y Logo Principal */
+.brand-header { text-align: center; margin-bottom: 40px; }
+.logo-catas { max-width: 250px; height: auto; }
 
-/* Encabezado y Logo de Marca */
-.encabezado-marca {
-    text-align: center;
-    margin-bottom: 40px;
-}
+h1 { text-align: center; color: #f7c32f; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #e32c6c; padding-bottom: 10px; margin-bottom: 30px; }
 
-.logo-catas {
-    max-width: 280px;
-    height: auto;
-}
+/* Panel de Gráficos - RECUADROS EN BLANCO */
+.panel-graficos { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 50px; }
+.tarjeta-grafico { flex: 1 1 30%; min-width: 300px; height: 350px; background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #444; color: #000; position: relative; }
+.tarjeta-grafico.pie-chart { height: 400px; }
+.tarjeta-grafico h3 { font-size: 1rem; color: #333; text-align: center; margin-top: 0; margin-bottom: 15px; }
+canvas { width: 100% !important; height: 100% !important; }
 
-h1 {
-    color: #f7c32f; /* Amarillo de marca */
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 2px solid #e32c6c; /* Rosado de marca */
-    padding-bottom: 12px;
-    margin-bottom: 35px;
-}
+/* Cuadrícula de Medallero - CARDS EN BLANCO */
+.rejilla-medallero { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-top: 40px; }
+.card-medalla { background: #ffffff; border: 1px solid #e0e0e0; padding: 20px; border-radius: 12px; text-decoration: none; color: inherit; display: block; transition: 0.2s; position: relative; cursor: pointer; color: #000; }
+.card-medalla:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(247, 195, 47, 0.2); border-color: #f7c32f; }
 
-/* Sección de Gráficos (Panel de Control) */
-.panel-graficos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 60px;
-    justify-content: center;
-}
+/* Logos */
+.logo-container { text-align: center; height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+.logo-cerveza { max-width: 120px; max-height: 120px; object-fit: contain; }
+.logo-certamen { position: absolute; top: 10px; right: 10px; width: 45px; height: auto; border-radius: 50%; background: white; padding: 2px; }
 
-.tarjeta-grafico {
-    flex: 1 1 320px;
-    background: rgba(255, 255, 255, 0.05); /* Fondo sutil translúcido */
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #1a3a4d;
-    height: 380px;
-}
+/* Textos Medallero */
+.card-medalla p { margin: 5px 0; font-size: 0.85rem; color: #555; }
+.card-medalla strong { color: #e32c6c; } /* Estilo de medalla en rosa */
 
-.tarjeta-grafico h3 {
-    font-size: 1.1rem;
-    color: #f7c32f;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-/* Cuadrícula del Medallero */
-.rejilla-medallero {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 25px;
-}
-
-/* Tarjeta Individual de Medalla */
-.tarjeta-medalla {
-    background-color: #ffffff; /* Fondo blanco para resaltar logos */
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none; /* Sin subrayado de enlace */
-    color: #0c1f2b; /* Texto oscuro sobre blanco */
-    display: block;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.tarjeta-medalla:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 20px rgba(247, 195, 47, 0.4);
-    border-color: #f7c32f; /* Borde amarillo al pasar el ratón */
-}
-
-/* Contenedor del Logo de la Cervecería */
-.contenedor-logo {
-    height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
-}
-
-.logo-cerveza {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* Logo del Certamen (Esquina superior derecha) */
-.logo-certamen {
-    width: 48px;
-    height: 48px;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #ffffff;
-    border-radius: 50%;
-    padding: 3px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-    border: 1px solid #eee;
-}
-
-/* Textos dentro de la tarjeta */
-.tarjeta-medalla p {
-    margin: 4px 0;
-    font-size: 0.9rem;
-}
-
-.tarjeta-medalla strong {
-    display: block;
-    font-size: 1.05rem;
-    margin-bottom: 2px;
-}
-
-.tipo-medalla {
-    color: #e32c6c; /* Rosado de marca para el premio */
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    margin-top: 8px;
-}
-
-/* Separador horizontal decorativo */
-hr {
-    border: 0;
-    border-top: 2px solid #e32c6c;
-    margin: 60px 0;
-    opacity: 0.4;
-}
-
-/* Ajuste para dispositivos móviles */
-@media (max-width: 600px) {
-    .tarjeta-grafico {
-        flex: 1 1 100%;
-        height: 300px;
-    }
-}
+hr { border: 0; border-top: 2px solid #e32c6c; margin: 50px 0; opacity: 0.5; }
