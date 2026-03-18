@@ -2,29 +2,35 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APP MEDALLAS - Dashboard & Medallero</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
-        .chart-wrapper { height: 300px; margin-bottom: 50px; }
-        .grid-medallas { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
-        .card-medalla { border: 1px solid #ddd; padding: 10px; text-align: center; border-radius: 8px; }
-        .logo-cerveza { max-width: 100px; height: auto; }
-        .logo-certamen { max-width: 50px; margin-top: 5px; }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <h1>📊 Estadísticas de Medallas</h1>
-        <div class="chart-wrapper"><canvas id="graficoCervecerias"></canvas></div>
-        <div class="chart-wrapper"><canvas id="graficoEstilos"></canvas></div>
-        <div class="chart-wrapper"><canvas id="graficoPaises"></canvas></div>
+        <div class="dashboard-graficos">
+            <div class="chart-card">
+                <h3>🏆 Top 15 Cervecerías Chilenas</h3>
+                <canvas id="graficoCervecerias"></canvas>
+            </div>
+            <div class="chart-card pie-chart">
+                <h3>🍺 Estilos más premiados (Chile)</h3>
+                <canvas id="graficoEstilos"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>🌍 Top 5 Países con más Medallas</h3>
+                <canvas id="graficoPaises"></canvas>
+            </div>
+        </div>
 
         <hr>
+
         <h1>🥇 Medallero Completo</h1>
-        <div id="medallero" class="grid-medallas">
-            </div>
+        <div id="medallero-grid" class="medallero-grid">
+            <p style="text-align: center; width: 100%;">Cargando medallero...</p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
